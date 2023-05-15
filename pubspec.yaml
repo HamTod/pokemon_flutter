@@ -1,0 +1,36 @@
+name: pokemon2
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  cloud_firestore: ^4.7.0
+  firebase_auth: ^4.6.0
+  firebase_core: ^2.10.0
+  rxdart: ^0.27.5
+  mobx: ^2.1.4
+  provider: ^6.0.5
+  http: ^0.13.6
+  cached_network_image: ^3.1.0
+  flutter_mobx: ^2.0.6+5
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.3
+  mobx_codegen: ^2.1.1
+
+
+flutter:
+  uses-material-design: true
+

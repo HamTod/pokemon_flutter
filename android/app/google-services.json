@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "643890352531",
+    "project_id": "pokemon-76419",
+    "storage_bucket": "pokemon-76419.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643890352531:android:4af370b5c0c994e9891866",
+        "android_client_info": {
+          "package_name": "com.example.pokemon2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643890352531-ghhm513ujdt9hf31c0thk7hk6o0om4ut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfnEElKQQNeRCR6oZbGLmegCQnxnY5Keg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643890352531-ghhm513ujdt9hf31c0thk7hk6o0om4ut.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "643890352531-por6mu3eo5u4d6fmp276h677hp8c2uml.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pokemon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
