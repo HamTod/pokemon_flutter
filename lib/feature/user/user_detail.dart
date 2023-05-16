@@ -46,7 +46,7 @@ class _UserDetailState extends State<UserDetail> {
               SizedBox(
                 height: size.width,
                 child: GoogleMap(
-                  mapType: MapType.normal,
+                  mapType: MapType.terrain,
                   markers: markers,
                   initialCameraPosition: _kGooglePlex,
                   onMapCreated: (GoogleMapController controller) {
