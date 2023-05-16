@@ -31,6 +31,10 @@ class UserData {
       company: Company.fromJson(json['company']),
     );
   }
+
+  String get avatar {
+    return 'https://ichef.bbci.co.uk/news/976/cpsprodpb/17638/production/_124800859_gettyimages-817514614.jpg';
+  }
 }
 
 class Address {
@@ -73,6 +77,14 @@ class Geo {
       lat: json['lat'],
       lng: json['lng'],
     );
+  }
+
+  double get latitude {
+    return double.parse(lat);
+  }
+
+  double get long {
+    return double.parse(lng);
   }
 }
 

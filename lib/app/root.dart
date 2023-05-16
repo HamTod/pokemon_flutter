@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon2/app/app_routes.dart';
 import 'package:pokemon2/pages/home_page.dart';
 import 'package:pokemon2/pages/user_page.dart';
 
@@ -26,6 +27,13 @@ class _RootState extends State<Root> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Test'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.map);
+              },
+              icon: const Icon(Icons.map))
+        ],
       ),
       body: _pages[currentIndex],
       bottomNavigationBar: MyBottomNav(
