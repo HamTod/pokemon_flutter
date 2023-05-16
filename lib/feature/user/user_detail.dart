@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pokemon2/data/post_data.dart';
 import 'package:pokemon2/data/user_data.dart';
 
 class UserDetail extends StatefulWidget {
@@ -28,7 +29,9 @@ class _UserDetailState extends State<UserDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ModalRoute.of(context)?.settings.arguments as UserData;
+    final arg = ModalRoute.of(context)?.settings.arguments as UserDetailsArg;
+    final user = arg.user;
+    final post = arg.listPost;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +56,18 @@ class _UserDetailState extends State<UserDetail> {
                     _controller.complete(controller);
                   },
                 ),
-              )
+              ),
+              const SizedBox(height: 20),
+              ...post.map((e) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(e.title,
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                      Text(e.body),
+                      const Divider()
+                    ],
+                  ))
             ],
           ),
         ),
@@ -77,7 +91,8 @@ class _UserDetailState extends State<UserDetail> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      final user = ModalRoute.of(context)?.settings.arguments as UserData;
+      final arg = ModalRoute.of(context)?.settings.arguments as UserDetailsArg;
+      final user = arg.user;
       setState(() {
         markers.add(Marker(
             markerId: MarkerId(user.id.toString()),
@@ -87,4 +102,11 @@ class _UserDetailState extends State<UserDetail> {
       _goToLocation(user.address.geo.latitude, user.address.geo.long);
     });
   }
+}
+
+class UserDetailsArg {
+  final UserData user;
+  final List<PostData> listPost;
+
+  UserDetailsArg(this.user, this.listPost);
 }

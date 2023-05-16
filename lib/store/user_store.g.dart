@@ -25,6 +25,22 @@ mixin _$UserStore on _UserStore, Store {
     });
   }
 
+  late final _$postListAtom =
+      Atom(name: '_UserStore.postList', context: context);
+
+  @override
+  List<PostData> get postList {
+    _$postListAtom.reportRead();
+    return super.postList;
+  }
+
+  @override
+  set postList(List<PostData> value) {
+    _$postListAtom.reportWrite(value, super.postList, () {
+      super.postList = value;
+    });
+  }
+
   late final _$_UserStoreActionController =
       ActionController(name: '_UserStore', context: context);
 
@@ -40,9 +56,21 @@ mixin _$UserStore on _UserStore, Store {
   }
 
   @override
+  void setPostList(List<PostData> data) {
+    final _$actionInfo = _$_UserStoreActionController.startAction(
+        name: '_UserStore.setPostList');
+    try {
+      return super.setPostList(data);
+    } finally {
+      _$_UserStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-userList: ${userList}
+userList: ${userList},
+postList: ${postList}
     ''';
   }
 }

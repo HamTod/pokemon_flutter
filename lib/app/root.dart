@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon2/app/app_routes.dart';
+import 'package:pokemon2/pages/animal_page.dart';
 import 'package:pokemon2/pages/home_page.dart';
 import 'package:pokemon2/pages/user_page.dart';
 
@@ -16,7 +17,7 @@ class _RootState extends State<Root> {
   static final List<Widget> _pages = [
     const HomePage(),
     const UserPage(),
-    const Center(child: Text('Text3')),
+    const AnimalPage(),
     const Center(child: Text('Text4')),
   ];
 
