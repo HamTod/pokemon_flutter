@@ -20,4 +20,8 @@ class PokemonData {
     data['url'] = url;
     return data;
   }
+
+  String get newUrl {
+    return 'https://www.pokemon.com/static-assets/app/static3/img/og-default-image.jpeg';
+  }
 }

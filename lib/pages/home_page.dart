@@ -32,16 +32,22 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: [
                 CachedNetworkImage(
-                  imageUrl: item.url,
+                  imageUrl: item.newUrl,
                   placeholder: (context, url) =>
                       const CircularProgressIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 Align(
                     alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(item.name),
+                    child: Container(
+                      color: Colors.black,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          item.name,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ))
               ],
             ),

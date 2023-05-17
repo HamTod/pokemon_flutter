@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokemon2/app/app_routes.dart';
 import 'package:pokemon2/pages/animal_page.dart';
 import 'package:pokemon2/pages/home_page.dart';
+import 'package:pokemon2/pages/setting_page.dart';
 import 'package:pokemon2/pages/user_page.dart';
 
 import 'bottom_nav.dart';
@@ -18,7 +19,7 @@ class _RootState extends State<Root> {
     const HomePage(),
     const UserPage(),
     const AnimalPage(),
-    const Center(child: Text('Text4')),
+    const SettingPage(),
   ];
 
   int currentIndex = 0;

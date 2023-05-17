@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokemon2/app/app_routes.dart';
 import 'package:pokemon2/feature/auth/splash_screen.dart';
 import 'package:pokemon2/store/user_store.dart';
@@ -20,15 +22,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      routes: AppRoutes().routes(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
-    );
+    final authStore = Provider.of<AuthStore>(context, listen: false);
+    return Observer(builder: (context) {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        routes: AppRoutes().routes(),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: authStore.lang,
+        home: const SplashScreen(),
+      );
+    });
   }
 
   @override
