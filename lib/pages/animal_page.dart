@@ -19,55 +19,77 @@ class _AnimalPageState extends State<AnimalPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Animal",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            IconButton(
-                onPressed: () async {
-                  final res = await _showMyDialog();
+    showSnack() {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("Animal",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+              IconButton(
+                  onPressed: () async {
+                    final res = await _showMyDialog();
+                    if (res != null) {
+                      await animalService.addAnimal(AnimalData(
+                          name: res['animal'], value: int.parse(res['value'])));
+                      showSnack();
+                    }
+                  },
+                  icon: const Icon(Icons.add_circle_outline)),
+            ],
+          ),
+          ...listAnimal.map((e) =>
+              ListTile(
+                title: Text(e.name),
+                subtitle: Text(e.value.toString()),
+                onTap: () async {
+                  final res = await _showMyDialog(e);
                   if (res != null) {
-                    animalService.addAnimal(AnimalData(
-                        name: res['animal'], value: int.parse(res['value'])));
+                    await animalService.updateAnimal(AnimalData.fromJson({
+                      ...e.toJson(),
+                      'reference': e.reference,
+                      'name': res['animal'],
+                      'value': int.parse(res['value'])
+                    }));
+                    showSnack();
                   }
                 },
-                icon: const Icon(Icons.add_circle_outline)),
-          ],
-        ),
-        ...listAnimal.map((e) => ListTile(
-              title: Text(e.name),
-              subtitle: Text(e.value.toString()),
-              onTap: () async {
-                final res = await _showMyDialog(e);
-                if (res != null) {
-                  animalService.updateAnimal(AnimalData.fromJson({
-                    ...e.toJson(),
-                    'reference': e.reference,
-                    'name': res['animal'],
-                    'value': int.parse(res['value'])
-                  }));
-                }
-              },
-              trailing: IconButton(
-                  onPressed: () {
-                    // final res = await _showMyDialog();
+                trailing: IconButton(
+                    onPressed: () async {
+                      // final res = await _showMyDialog();
 
-                    animalService.deleteAnimal(e);
-                  },
-                  icon: const Icon(Icons.delete)),
-            ))
-      ],
+                      await animalService.deleteAnimal(e);
+                      showSnack();
+                    },
+                    icon: const Icon(Icons.delete)),
+              ))
+        ],
+      ),
     );
   }
+
+  final snackBar = SnackBar(
+    content: const Text('Success!'),
+    backgroundColor: Colors.green,
+    action: SnackBarAction(
+      label: 'Undo',
+
+      onPressed: () {
+        // Some code to undo the change.
+      },
+    ),
+  );
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async {
+          (timeStamp) async {
         subscription = animalService.getAnimal().listen((data) {
           setState(() {
             listAnimal = data;
@@ -90,7 +112,7 @@ class _AnimalPageState extends State<AnimalPage> {
     final local = MaterialLocalizations.of(context);
     final animalController = TextEditingController(text: animal?.name);
     final valueController =
-        TextEditingController(text: animal?.value.toString());
+    TextEditingController(text: animal?.value.toString());
     return showDialog<Map?>(
       context: context,
       barrierDismissible: false, // user must tap button!

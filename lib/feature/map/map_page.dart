@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:pokemon2/data/user_data.dart';
 import 'package:pokemon2/store/user_store.dart';
 import 'package:provider/provider.dart';
 
@@ -109,12 +110,42 @@ class _MapPageState extends State<MapPage> {
           markers.add(Marker(
               markerId: MarkerId(user.id.toString()),
               icon: BitmapDescriptor.fromBytes(markerIcon),
+              onTap: () {
+                showBottomSheet(user);
+              },
               position:
                   LatLng(user.address.geo.latitude, user.address.geo.long)));
         });
       }
       fitBounds();
     });
+  }
+
+  showBottomSheet(UserData user) {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return SizedBox(
+            height: 200,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(user.avatar),
+                    radius: 50,
+                  ),
+                  Text(user.name),
+                  ElevatedButton(
+                    child: const Text('Close BottomSheet'),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   Future<Uint8List> getNetworkImageMarker(
