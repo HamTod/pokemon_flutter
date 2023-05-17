@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-final List<BottomNavItem> listBottomIcon = [
-  BottomNavItem(title: 'หน้าแรก', icon: Icons.home),
-  BottomNavItem(title: 'หน้าสอง', icon: Icons.access_alarm),
-  BottomNavItem(title: 'หน้าสาม', icon: Icons.access_alarm),
-  BottomNavItem(title: 'หน้าสี่', icon: Icons.access_alarm)
-];
+List<BottomNavItem> listBottomIcon(AppLocalizations appText) {
+  return [
+    BottomNavItem(title: appText.homePage, icon: Icons.home),
+    BottomNavItem(title: appText.userPage, icon: Icons.account_box_rounded),
+    BottomNavItem(title: appText.animalPage, icon: Icons.list),
+    BottomNavItem(title: appText.settingPage, icon: Icons.settings)
+  ];
+}
 
 class MyBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -17,11 +20,12 @@ class MyBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appText = AppLocalizations.of(context)!;
     return BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
         onTap: onTap,
-        items: listBottomIcon
+        items: listBottomIcon(appText)
             .map((e) =>
                 BottomNavigationBarItem(icon: Icon(e.icon), label: e.title))
             .toList());

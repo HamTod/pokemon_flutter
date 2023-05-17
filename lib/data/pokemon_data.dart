@@ -22,6 +22,6 @@ class PokemonData {
   }
 
   String get newUrl {
-    return 'https://www.pokemon.com/static-assets/app/static3/img/og-default-image.jpeg';
+    return 'https://th.portal-pokemon.com/play/resources/pokedex/img/pm/5794f0251b1180998d72d1f8568239620ff5279c.png';
   }
 }

@@ -35,6 +35,7 @@ class _LogInState extends State<LogIn> {
             obscureText: true,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.lock),
               labelText: 'Password',
             ),
           ),

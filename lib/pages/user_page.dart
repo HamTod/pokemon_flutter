@@ -21,25 +21,50 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   StreamSubscription? subscription;
 
+  final searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final userStore = Provider.of<UserStore>(context, listen: false);
     return Observer(builder: (context) {
-      return ListView(
-        children: userStore.userList
-            .map((e) => ListTile(
-                  title: Text(e.name),
-                  subtitle: Text(e.email),
-                  trailing: const Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    final list = userStore.postList
-                        .where((element) => element.userId == e.id)
-                        .toList();
-                    Navigator.pushNamed(context, AppRoutes.userDetails,
-                        arguments: UserDetailsArg(e, list));
-                  },
-                ))
-            .toList(),
+      List<UserData> filteredUsers = userStore.userList
+          .where(
+              (element) => element.name.contains(searchController.value.text))
+          .toList();
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: searchController,
+              onChanged: (value) {
+                setState(() {});
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'ค้นหา',
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              children: filteredUsers
+                  .map((e) => ListTile(
+                        title: Text(e.name),
+                        subtitle: Text(e.email),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: () {
+                          final list = userStore.postList
+                              .where((element) => element.userId == e.id)
+                              .toList();
+                          Navigator.pushNamed(context, AppRoutes.userDetails,
+                              arguments: UserDetailsArg(e, list));
+                        },
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
       );
     });
   }

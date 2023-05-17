@@ -1,3 +1,8 @@
 {
-  "helloWorld": "สวัสดี"
+  "@@locale": "th",
+  "helloWorld": "สวัสดี",
+  "homePage": "หน้าแรก",
+  "userPage": "ผู้ใช้",
+  "animalPage": "สัตว์",
+  "settingPage": "ตั้งค่า"
 }

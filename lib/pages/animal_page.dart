@@ -53,6 +53,8 @@ class _AnimalPageState extends State<AnimalPage> {
               },
               trailing: IconButton(
                   onPressed: () {
+                    // final res = await _showMyDialog();
+
                     animalService.deleteAnimal(e);
                   },
                   icon: const Icon(Icons.delete)),

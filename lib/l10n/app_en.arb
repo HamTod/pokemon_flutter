@@ -1,6 +1,8 @@
 {
+  "@@locale": "en",
   "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  }
+  "homePage": "Home",
+  "userPage": "User",
+  "animalPage": "Animal",
+  "settingPage": "Setting"
 }

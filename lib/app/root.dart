@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pokemon2/app/app_routes.dart';
 import 'package:pokemon2/pages/animal_page.dart';
 import 'package:pokemon2/pages/home_page.dart';
@@ -28,13 +29,14 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test'),
+        title: Text(getAppBarTitle()),
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.map);
-              },
-              icon: const Icon(Icons.map))
+          if (currentIndex == 1)
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.map);
+                },
+                icon: const Icon(Icons.map))
         ],
       ),
       body: _pages[currentIndex],
@@ -43,6 +45,19 @@ class _RootState extends State<Root> {
         onTap: handleTap,
       ),
     );
+  }
+
+  getAppBarTitle() {
+    final appText = AppLocalizations.of(context)!;
+    if (currentIndex == 0) {
+      return appText.homePage;
+    } else if (currentIndex == 1) {
+      return appText.userPage;
+    } else if (currentIndex == 2) {
+      return appText.animalPage;
+    } else if (currentIndex == 3) {
+      return appText.settingPage;
+    }
   }
 
   handleTap(int index) {

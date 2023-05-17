@@ -46,6 +46,7 @@ class _UserDetailState extends State<UserDetail> {
               Text('Name : ${user.name}'),
               Text('Email : ${user.email}'),
               Text('Phone : ${user.phone}'),
+              const SizedBox(height: 20),
               SizedBox(
                 height: size.width,
                 child: GoogleMap(
