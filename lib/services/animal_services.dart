@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pokemon2/data/animal_data.dart';
-import 'package:rxdart/rxdart.dart';
 
 class AnimalServices {
   static final _firebase = FirebaseFirestore.instance;
@@ -11,13 +10,22 @@ class AnimalServices {
     return ref.add(data.toJson());
   }
 
-  Future<List<AnimalData>> getAnimal() async {
+  Stream<List<AnimalData>> getAnimal() {
     final ref = _firebase.collection(_collection);
-    List<AnimalData> list = [];
-    await ref.snapshots().doOnData((data) {
-      final res = data.docs.map((e) => AnimalData.fromJson(e.data()));
-      list.addAll(res);
-    }).listen((event) {}).asFuture();
-    return list;
+    return ref.snapshots().map((data) {
+      final res = data.docs
+          .map((e) => AnimalData.fromJson(
+              {'id': e.id, 'reference': e.reference, ...e.data()}))
+          .toList();
+      return res;
+    });
+  }
+
+  Future<void>? updateAnimal(AnimalData data) {
+    return data.reference?.update(data.toJson());
+  }
+
+  Future<void>? deleteAnimal(AnimalData data) {
+    return data.reference?.delete();
   }
 }
