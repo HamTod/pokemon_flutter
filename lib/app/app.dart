@@ -7,6 +7,7 @@ import 'package:pokemon2/app/app_routes.dart';
 import 'package:pokemon2/feature/auth/splash_screen.dart';
 import 'package:pokemon2/store/auth_store.dart';
 import 'package:pokemon2/store/user_store.dart';
+import 'package:pokemon2/theme/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -14,8 +15,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   static final GlobalKey<NavigatorState> navigatorKey =
-  GlobalKey<NavigatorState>();
-
+      GlobalKey<NavigatorState>();
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -24,17 +24,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _auth = FirebaseAuth.instance;
 
-
   @override
   Widget build(BuildContext context) {
     final authStore = Provider.of<AuthStore>(context, listen: false);
+    final userStore = Provider.of<UserStore>(context, listen: false);
     return Observer(builder: (context) {
       return MaterialApp(
         title: 'Flutter Demo',
         routes: AppRoutes().routes(),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: userStore.currentTheme,
+        themeMode: userStore.currentTheme == MyThemes.lightTheme
+            ? ThemeMode.light
+            : ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           AppLocalizations.delegate,

@@ -6,7 +6,10 @@ import 'package:pokemon2/pages/home_page.dart';
 import 'package:pokemon2/pages/notification_page.dart';
 import 'package:pokemon2/pages/setting_page.dart';
 import 'package:pokemon2/pages/user_page.dart';
+import 'package:pokemon2/store/user_store.dart';
+import 'package:pokemon2/theme/theme.dart';
 import 'package:pokemon2/tools/notification.dart';
+import 'package:provider/provider.dart';
 
 import 'bottom_nav.dart';
 
@@ -30,6 +33,7 @@ class _RootState extends State<Root> {
 
   @override
   Widget build(BuildContext context) {
+    final userStore = Provider.of<UserStore>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(getAppBarTitle()),
@@ -39,7 +43,15 @@ class _RootState extends State<Root> {
                 onPressed: () {
                   Navigator.pushNamed(context, AppRoutes.map);
                 },
-                icon: const Icon(Icons.map))
+                icon: const Icon(Icons.map)),
+          if (currentIndex == 4)
+            IconButton(
+                onPressed: () {
+                  userStore.setCurrentTheme(!userStore.isDark);
+                },
+                icon: Icon(userStore.currentTheme == MyThemes.darkTheme
+                    ? Icons.light
+                    : Icons.nightlight))
         ],
       ),
       body: _pages[currentIndex],
