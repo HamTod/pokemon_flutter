@@ -13,12 +13,17 @@ import 'package:rxdart/rxdart.dart';
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  static final GlobalKey<NavigatorState> navigatorKey =
+  GlobalKey<NavigatorState>();
+
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   final _auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {

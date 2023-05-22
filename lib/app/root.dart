@@ -3,8 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pokemon2/app/app_routes.dart';
 import 'package:pokemon2/pages/animal_page.dart';
 import 'package:pokemon2/pages/home_page.dart';
+import 'package:pokemon2/pages/notification_page.dart';
 import 'package:pokemon2/pages/setting_page.dart';
 import 'package:pokemon2/pages/user_page.dart';
+import 'package:pokemon2/tools/notification.dart';
 
 import 'bottom_nav.dart';
 
@@ -20,6 +22,7 @@ class _RootState extends State<Root> {
     const HomePage(),
     const UserPage(),
     const AnimalPage(),
+    const NotificationPage(),
     const SettingPage(),
   ];
 
@@ -40,6 +43,11 @@ class _RootState extends State<Root> {
         ],
       ),
       body: _pages[currentIndex],
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showNotification();
+          },
+          child: const Icon(Icons.notification_add)),
       bottomNavigationBar: MyBottomNav(
         currentIndex: currentIndex,
         onTap: handleTap,
@@ -56,6 +64,8 @@ class _RootState extends State<Root> {
     } else if (currentIndex == 2) {
       return appText.animalPage;
     } else if (currentIndex == 3) {
+      return 'notification';
+    } else if (currentIndex == 4) {
       return appText.settingPage;
     }
   }

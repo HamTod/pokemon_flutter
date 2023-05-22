@@ -16,9 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
       appBar: AppBar(
         title: const Text('SPLASH'),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
-          children: const [Text('Loading...')],
+          children: [Text('Loading...')],
         ),
       ),
     );

@@ -6,6 +6,7 @@ List<BottomNavItem> listBottomIcon(AppLocalizations appText) {
     BottomNavItem(title: appText.homePage, icon: Icons.home),
     BottomNavItem(title: appText.userPage, icon: Icons.account_box_rounded),
     BottomNavItem(title: appText.animalPage, icon: Icons.list),
+    BottomNavItem(title: 'Notifications', icon: Icons.notification_add),
     BottomNavItem(title: appText.settingPage, icon: Icons.settings)
   ];
 }
