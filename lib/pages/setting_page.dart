@@ -18,9 +18,9 @@ class _SettingPageState extends State<SettingPage> {
 
     return Column(
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
+          children: [
             SelectLanguage(),
           ],
         ),
