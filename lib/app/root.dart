@@ -36,7 +36,7 @@ class _RootState extends State<Root> {
     final userStore = Provider.of<UserStore>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text(getAppBarTitle()),
+        title: Text(getAppBarTitle()), //ชื่อAppBar แต่ละหน้า ตามเมนูด้านล่าง
         actions: [
           if (currentIndex == 1)
             IconButton(
@@ -55,6 +55,7 @@ class _RootState extends State<Root> {
         ],
       ),
       body: _pages[currentIndex],
+
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             showNotification();
@@ -67,6 +68,7 @@ class _RootState extends State<Root> {
     );
   }
 
+  ///เมนูด้านล่าง
   getAppBarTitle() {
     final appText = AppLocalizations.of(context)!;
     if (currentIndex == 0) {

@@ -33,7 +33,7 @@ class UserData {
   }
 
   String get avatar {
-    return 'https://ichef.bbci.co.uk/news/976/cpsprodpb/17638/production/_124800859_gettyimages-817514614.jpg';
+    return 'https://i.pinimg.com/564x/47/e6/72/47e672805ea73062b9e804b4a2cd1013.jpg';
   }
 }
 
